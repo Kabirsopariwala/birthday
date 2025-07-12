@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+<!-- Name input screen -->
+<div id="name-screen" class="center-screen">
+  <h2>Enter Name</h2>
+  <input type="text" id="name-input" placeholder="Enter name" />
+  <button onclick="submitName()">Start</button>
+</div>
+
+<!-- Envelope screen -->
+<div id="envelope-screen" class="center-screen hidden">
+  <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" 
+       alt="Open Envelope" class="envelope" onclick="openCard()" />
+  <p>Tap to Open</p>
+</div>
+
+<!-- Birthday screen -->
+<div id="birthday-screen" class="hidden scroll-full">
+  <h1 id="birthday-heading" class="blinking pop-once">🎉 Happy Birthday, <span id="name">B</span>! 🎂</h1>
+  <div class="full-message">
+    <p>
+        On this special day, I want to tell you just how amazing you are. Your heart, your smile,
+        your energy — they make the world a better place. You light up every room you enter.
+        May this year bring you endless joy, success, love, and unforgettable memories.
+      </p>
+      <p>
+        As you celebrate today, remember how cherished and appreciated you are.
+        This day is about you — your laughter, your kindness, and everything you’ve overcome.
+        Keep dreaming big and living fully.
+      </p>
+      <p>
+        Life is a beautiful journey, and you're making it brighter for everyone around you.
+        So here's to new beginnings, beautiful adventures, and dreams coming true.
+        Happy Birthday again, B! 🎁🎂🎈
+      </p>
+      <p>
+        With all the love in the world,<br>
+        — Your secret admirer 😄
+      </p>  
+    <p style="text-align: center;">
+      <a style="text-decoration: none; font-weight: bold; font-size: 24pt;" href="gallery.html">📸 Click Me</a>
+    </p>
+  </div>
+</div>
+
+<canvas id="confetti"></canvas>
+<audio id="birthday-audio" src="birthday.mp3"></audio>
+
+<script>
+  function submitName() {
+    const name = document.getElementById("name-input").value.trim();
+    if (name === "") {
+      alert("Please enter a name!");
+      return;
+    }
+    localStorage.setItem("birthdayName", name);
+    document.getElementById("name").innerText = name;
+    document.getElementById("name-screen").classList.add("hidden");
+    document.getElementById("envelope-screen").classList.remove("hidden");
+  }
+
+  function openCard() {
+    document.getElementById("envelope-screen").classList.add("hidden");
+    const birthdayScreen = document.getElementById("birthday-screen");
+    birthdayScreen.classList.remove("hidden");
+
+    const audio = document.getElementById("birthday-audio");
+    audio.play().catch(() => {
+      document.body.addEventListener("click", () => {
+        audio.play();
+      }, { once: true });
+    });
+
+    confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+    setTimeout(() => confetti({ particleCount: 100, spread: 70, origin: { y: 0.5 } }), 1000);
+    setTimeout(() => confetti({ particleCount: 150, spread: 120, origin: { y: 0.4 } }), 2000);
+  }
+
+  // Restore name on reload
+  window.addEventListener("DOMContentLoaded", () => {
+    const storedName = localStorage.getItem("birthdayName");
+    if (storedName) {
+      document.getElementById("name").innerText = storedName;
+    }
+  });
+</script>
+</body>
+</html>

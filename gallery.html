@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Memories</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+<div id="birthday-screen" class="scroll-full">
+  <h1 id="birthday-heading" class="blinking pop-once">🎉 Happy Birthday, <span id="name">B</span>! 🎂</h1>
+
+  <div class="photo-section">
+
+      <div class="photo-block left show">
+        <img src="college1.png" alt="College Memory 1" />
+        <div class="photo-text">
+          On this special day, I want to tell you just how amazing you are. Your heart, your smile,
+          your energy — they make the world a better place. You light up every room you enter.
+          May this year bring you endless joy, success, love, and unforgettable memories.
+        </div>
+      </div>
+
+      <div class="photo-block right show">
+        <img src="college2.jpg" alt="College Memory 2" />
+        <div class="photo-text">
+          As you celebrate today, remember how cherished and appreciated you are.
+          This day is about you — your laughter, your kindness, and everything you’ve overcome.
+          Keep dreaming big and living fully.
+        </div>
+      </div>
+
+      <div class="photo-block left show">
+        <img src="college3.png" alt="College Memory 3" />
+        <div class="photo-text">
+          Life is a beautiful journey, and you're making it brighter for everyone around you.
+          So here's to new beginnings, beautiful adventures, and dreams coming true.
+          Happy Birthday again, B! 🎁🎂🎈
+        </div>
+      </div>
+
+      <div class="photo-block right show">
+        <img src="college4.png" alt="College Memory 4" />
+        <div class="photo-text">
+          With all the love in the world,<br>— Your secret admirer 😄
+        </div>
+      </div>
+
+    </div>
+
+</div>
+
+<audio id="birthday-audio" src="birthday.mp3" autoplay></audio>
+
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const name = localStorage.getItem("birthdayName") || "B";
+    document.getElementById("name").textContent = name;
+
+    const audio = document.getElementById("birthday-audio");
+    audio.play().catch(() => {
+      document.body.addEventListener("click", () => {
+        audio.play();
+      }, { once: true });
+    });
+
+    // Confetti burst
+    confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+    setTimeout(() => confetti({ particleCount: 100, spread: 70, origin: { y: 0.5 } }), 1000);
+    setTimeout(() => confetti({ particleCount: 150, spread: 120, origin: { y: 0.4 } }), 2000);
+  });
+</script>
+</body>
+</html>

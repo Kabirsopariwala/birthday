@@ -1,0 +1,256 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+  background: #fbeeff;
+}
+
+/* Envelope screen */
+.center-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #fff0f6;
+  transition: opacity 0.8s ease;
+}
+
+.envelope {
+  width: 120px;
+  height: 120px;
+  cursor: pointer;
+  animation: bounce 1.5s infinite;
+}
+
+.center-screen p {
+  margin-top: 20px;
+  font-size: 1.3rem;
+  color: #d63384;
+  
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+/* Hide screen */
+.hidden {
+  display: none;
+}
+
+/* Birthday screen (scrollable) */
+.scroll-full {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+  padding: 40px 20px;
+  position: relative;
+}
+
+/* Glowing Heading */
+#birthday-screen h1 {
+  font-size: 3rem;
+  text-align: center;
+  color: white;
+  margin-bottom: 30px;
+  text-shadow: 0 0 10px #fff, 0 0 20px #f0f, 0 0 30px #f0f;
+  animation: glow 1.5s infinite alternate;
+  z-index: 2;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #f0f;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 40px #f0f;
+  }
+}
+
+/* Message paragraph */
+.full-message {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.2rem;
+  color: white;
+  line-height: 1.8;
+  z-index: 2;
+  text-align: center;
+}
+
+.full-message p {
+  margin-bottom: 30px;
+}
+
+/* Photo timeline section */
+.photo-block {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin: 80px 0;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-in-out;
+  width: 100%;
+  padding: 0 5vw;
+  box-sizing: border-box;
+}
+
+.photo-block.left {
+  flex-direction: row;
+}
+
+.photo-block.right {
+  flex-direction: row-reverse;
+}
+
+.photo-block.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.photo-block img {
+  width: 250px;
+  flex-shrink: 0;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+.photo-text {
+  flex: 1; /* Fills remaining space */
+  font-size: 1.2rem;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 20px;
+  border-radius: 15px;
+  line-height: 1.6;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+
+
+
+canvas#confetti {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  pointer-events: none;
+}
+
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  #birthday-screen h1 {
+    font-size: 2rem;
+  }
+
+  .photo-block img {
+    width: 180px;
+  }
+
+  .full-message {
+    font-size: 1rem;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .photo-block {
+    flex-direction: column !important;
+    align-items: center;
+    text-align: center;
+  }
+
+  .photo-block img {
+    width: 80%;
+    margin-bottom: 15px;
+  }
+
+  .photo-text {
+    width: 90%;
+    font-size: 1rem;
+  }
+}
+
+/* Continuous blinking effect */
+/* Strong glowing animation */
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 5px #fff, 0 0 10px #f0f, 0 0 20px #f0f, 0 0 30px #f0f;
+  }
+  50% {
+    text-shadow: 0 0 10px #ff0, 0 0 20px #ff0, 0 0 40px #ff0, 0 0 60px #f00;
+  }
+  100% {
+    text-shadow: 0 0 5px #fff, 0 0 10px #f0f, 0 0 20px #f0f, 0 0 30px #f0f;
+  }
+}
+
+.glow-text {
+  color: white;
+  font-weight: bold;
+  animation: glow 2s infinite;
+}
+
+/* One-time pop animation */
+@keyframes popOut {
+  0% {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pop-once {
+  animation: popOut 0.8s ease-out;
+}
+
+input#name-input {
+  padding: 10px;
+  font-size: 1.2rem;
+  border-radius: 6px;
+  border: none;
+  margin-top: 10px;
+  width: 250px;
+  text-align: center;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  margin-top: 15px;
+  border: none;
+  border-radius: 6px;
+  background-color: #f04;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #c03;
+}
