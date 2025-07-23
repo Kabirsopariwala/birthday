@@ -82,7 +82,7 @@ Thank you for everything. Enjoy your life. Keep smiling when I'm not around that
     const name = localStorage.getItem("birthdayName") || "B";
     document.getElementById("name").textContent = name;
 
-    const audio = document.getElementById("Ishq-love");
+    const audio = document.getElementById("birthday-audio");
     audio.play().catch(() => {
       document.body.addEventListener("click", () => {
         audio.play();
